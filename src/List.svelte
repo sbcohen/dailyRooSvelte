@@ -1,0 +1,95 @@
+<script>
+  import { createTask } from "./helpers.js";
+  //temporary roolette array of choices
+  let list = [
+    "Read for 30 minutes",
+    "Meditate for 10 minutes",
+    "Stretch/Yoga",
+    "Apply for 2 jobs",
+    "1 hour of online course",
+    "Run for 30 minutes",
+    "3 reps of weights",
+    "Call your representatives"
+  ].map(x => createTask(x));
+  list[0].done = true;
+
+  function toggleChecked(task) {
+    task.done = !task.done;
+    //Save("myRoo", savedTask);
+  }
+
+  function deleteTask(task) {
+    //this anonymous function is called when the X is clicked to delete a list item. it will delete the item from the saved memory and sort and rebuild the list on the display. It works the same way as the check box function above
+    list = list.filter(each => each != task);
+    //Save("myRoo",savedTask);
+  }
+</script>
+
+<style>
+  .list {
+    overflow-y: scroll;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+  }
+
+  .list-item {
+    font-size: 18px;
+    align-items: center;
+    vertical-align: middle;
+    margin-bottom: 20px;
+    background-color: rgba(235, 235, 235, 0.25);
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+    display: flex;
+    height: 80px;
+  }
+  .checked .text {
+    /* :checked matches any checked/selected radio, checkbox, or option */
+    text-decoration: line-through;
+  }
+
+  input[type="checkbox"] {
+    height: 28px;
+    width: 28px;
+    margin: 14px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .text {
+    font-size: 24px;
+    vertical-align: top;
+    padding: 14px;
+    margin-left: 0px;
+    display: flex;
+    flex: 1;
+  }
+
+  /* Delete X */
+  .delete {
+    display: flex;
+    padding: 14px;
+    align-items: center;
+  }
+</style>
+
+<div class="list" id="list">
+  {#each list as task}
+    <!-- #each loops over each list item and applies transformation -->
+    <div class="list-item" class:checked={task.done}>
+      <input
+        type="checkbox"
+        bind:checked={task.done}
+        on:click={() => toggleChecked(task)} />
+      <div class="text">{task.text}</div>
+      <div class="delete" on:click={() => deleteTask(task)}>{'\u2715'}</div>
+    </div>
+  {/each}
+
+</div>
