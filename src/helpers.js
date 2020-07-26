@@ -24,3 +24,21 @@ export function createTask(text, done = false) {
   let createTime = new Date();
   return { text, done, createTime };
 }
+
+//function that gets all saved tasks in correct sort order by doneness & time
+export function sortList(list) {
+  function compareListItem(a, b) {
+    if (a.done == b.done) {
+      return (
+        new Date(a.createTime).getTime() - new Date(b.createTime).getTime()
+      );
+    } else {
+      if (a.done == true) {
+        return 1;
+      } else {
+        return -1;
+      }
+    }
+  }
+  return list.sort(compareListItem);
+}

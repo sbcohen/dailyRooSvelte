@@ -1,27 +1,20 @@
 <script>
-  import { createTask } from "./helpers.js";
-  //temporary roolette array of choices
-  let list = [
-    "Read for 30 minutes",
-    "Meditate for 10 minutes",
-    "Stretch/Yoga",
-    "Apply for 2 jobs",
-    "1 hour of online course",
-    "Run for 30 minutes",
-    "3 reps of weights",
-    "Call your representatives"
-  ].map(x => createTask(x));
-  list[0].done = true;
+  import { createTask, sortList } from "./helpers.js";
+  import { Roos } from "./data.js";
 
   function toggleChecked(task) {
     task.done = !task.done;
-    //Save("myRoo", savedTask);
+    Roos.set($Roos);
   }
 
   function deleteTask(task) {
     //this anonymous function is called when the X is clicked to delete a list item. it will delete the item from the saved memory and sort and rebuild the list on the display. It works the same way as the check box function above
-    list = list.filter(each => each != task);
-    //Save("myRoo",savedTask);
+    $Roos = $Roos.filter(each => each != task);
+  }
+
+  let sortedList;
+  $: {
+    sortedList = sortList($Roos);
   }
 </script>
 
@@ -80,7 +73,7 @@
 </style>
 
 <div class="list" id="list">
-  {#each list as task}
+  {#each sortedList as task}
     <!-- #each loops over each list item and applies transformation -->
     <div class="list-item" class:checked={task.done}>
       <input
@@ -91,5 +84,4 @@
       <div class="delete" on:click={() => deleteTask(task)}>{'\u2715'}</div>
     </div>
   {/each}
-
 </div>

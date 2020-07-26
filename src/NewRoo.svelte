@@ -1,5 +1,6 @@
 <script>
   import { createTask } from "./helpers.js";
+  import { Roos } from "./data.js";
 
   let textString = "";
 
@@ -7,7 +8,9 @@
     textString = textString.trim();
     if (textString != "") {
       let task = createTask(textString);
-      console.log(task);
+      $Roos.push(task); //appends task to end of array
+      Roos.set($Roos); //refresh array - let svelte know this value has changed so it needs to update UI
+      //a simpler way of writing push and set is $Roos = $Roos.concat([task])
     }
     textString = "";
   }
