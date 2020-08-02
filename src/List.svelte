@@ -38,7 +38,8 @@
     border-width: thin;
     border-color: black;
     display: flex;
-    height: 80px;
+    height: 72px;
+    min-height: 72px;
   }
   .checked .text {
     /* :checked matches any checked/selected radio, checkbox, or option */

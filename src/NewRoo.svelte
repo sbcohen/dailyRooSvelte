@@ -1,6 +1,8 @@
 <script>
   import { createTask } from "./helpers.js";
+  import { random } from "./helpers.js";
   import { Roos } from "./data.js";
+  import { roolette } from "./data.js";
 
   let textString = "";
 
@@ -13,6 +15,19 @@
       //a simpler way of writing push and set is $Roos = $Roos.concat([task])
     }
     textString = "";
+  }
+
+  function playRoolette(event) {
+    let filteredRoolette = roolette.filter(item => {
+      //return a list of items not found already in the UI
+      return !$Roos.find(roo => roo.text.toLowerCase() == item.toLowerCase());
+    });
+    if (filteredRoolette.length > 0) {
+      let randomRoo = random(filteredRoolette);
+      let task = createTask(randomRoo);
+      $Roos.push(task);
+      Roos.set($Roos);
+    }
   }
 </script>
 
@@ -56,14 +71,17 @@
     flex: 1;
     right: 0;
   }
+
+  input::placeholder {
+  }
 </style>
 
 <div id="form">
-  <input type="text" bind:value={textString} />
+  <input type="text" placeholder="To Doo" bind:value={textString} />
   <div class="buttons">
     <button id="enter" on:click={submitTask}>Submit</button>
     <!-- Roolette -->
-    <button id="Roolette">Roolette!</button>
+    <button id="Roolette" on:click={playRoolette}>Roolette!</button>
   </div>
 
 </div>

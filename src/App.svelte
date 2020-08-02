@@ -2,6 +2,16 @@
   import List from "./List.svelte";
   import Greeting from "./Greeting.svelte";
   import NewRoo from "./NewRoo.svelte";
+  import Name from "./Name.svelte";
+
+  let showModal = false;
+
+  function openModal() {
+    showModal = true;
+  }
+  function closeModal() {
+    showModal = false;
+  }
 </script>
 
 <style>
@@ -16,6 +26,14 @@
 
   :global(#app) {
     height: 100%;
+  }
+
+  :global(input) {
+    outline: 0;
+    border: 1px solid black;
+    background: rgba(235, 235, 235, 0.25);
+    font-size: 24px;
+    padding: 10px 20px;
   }
 
   h2 {
@@ -35,8 +53,11 @@
 </style>
 
 <div class="app">
+  {#if showModal}
+    <Name onClose={closeModal} />
+  {/if}
   <div class="top">
-    <Greeting />
+    <Greeting onClick={openModal} />
     <h2>Roo's left to doo</h2>
   </div>
   <List />
