@@ -25,7 +25,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 20px;
+    padding: 0px 20px;
   }
 
   .list-item {
@@ -38,8 +38,8 @@
     border-width: thin;
     border-color: black;
     display: flex;
-    height: 72px;
-    min-height: 72px;
+    height: 56px;
+    min-height: 56px;
   }
   .checked .text {
     /* :checked matches any checked/selected radio, checkbox, or option */
@@ -50,7 +50,6 @@
     height: 28px;
     width: 28px;
     margin: 14px;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,7 +58,7 @@
   .text {
     font-size: 24px;
     vertical-align: top;
-    padding: 14px;
+    padding: 14px 0px;
     margin-left: 0px;
     display: flex;
     flex: 1;
@@ -70,6 +69,7 @@
     display: flex;
     padding: 14px;
     align-items: center;
+    font-size: 24px;
   }
 </style>
 

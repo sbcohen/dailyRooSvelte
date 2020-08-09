@@ -3,7 +3,7 @@ import { writable } from "svelte/store";
 
 let list = Load("myRoo", []);
 export const Roos = writable(list);
-export const name = writable(Load("myName", "Bud"));
+export const name = writable(Load("myName", "mate"));
 
 Roos.subscribe((updatedRoos) => Save("myRoo", updatedRoos));
 
@@ -11,13 +11,13 @@ name.subscribe((enteredName) => Save("myName", enteredName));
 
 export let roolette = [
   "Read for 30 minutes",
-  "Meditate for 10 minutes",
-  "Stretch/Yoga",
+  "Make some Brekkie",
+  "Stretch",
   "Apply for 2 jobs",
-  "1 hour of online course",
+  "Grab a coldie",
   "Run for 30 minutes",
   "3 reps of weights",
-  "Call your representatives",
-  "Listen to folklore",
+  "Call your reps",
+  "Fire up the barbie",
   "Listen to the news",
 ];

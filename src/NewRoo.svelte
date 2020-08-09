@@ -32,6 +32,14 @@
 </script>
 
 <style>
+  h2 {
+    font-family: "Luckiest Guy";
+    font-size: 28px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
   #form {
     margin: 20px;
     margin-bottom: 0px;
@@ -53,9 +61,11 @@
   }
 
   #enter {
+    font-family: "Luckiest Guy";
     font-size: 24px;
-    padding: 20px;
+    padding: 20px 0px;
     border: 1px solid black;
+    margin-right: 10px;
     background: rgba(235, 235, 235, 0.25);
     flex-grow: 1;
     flex: 1;
@@ -63,9 +73,11 @@
   }
 
   #Roolette {
+    font-family: "Luckiest Guy";
     font-size: 24px;
-    padding: 20px;
+    padding: 20px 0px;
     border: 1px solid black;
+    margin-left: 10px;
     background: rgba(235, 235, 235, 0.25);
     flex-grow: 1;
     flex: 1;
@@ -77,11 +89,12 @@
 </style>
 
 <div id="form">
-  <input type="text" placeholder="To Doo" bind:value={textString} />
+  <h2>New roo, new you!</h2>
+  <input type="text" placeholder="to doo" bind:value={textString} />
   <div class="buttons">
-    <button id="enter" on:click={submitTask}>Submit</button>
+    <button id="enter" on:click={submitTask}>T'day mate</button>
     <!-- Roolette -->
-    <button id="Roolette" on:click={playRoolette}>Roolette!</button>
+    <button id="Roolette" on:click={playRoolette}>Boomerang</button>
   </div>
 
 </div>

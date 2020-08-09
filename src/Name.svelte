@@ -35,13 +35,14 @@
 
   .modal > div {
     width: 100%;
-    background: linear-gradient(-11deg, #d98988 20%, #a37094 85%);
+    background: linear-gradient(-11deg, #ce7262 15%, #7b4775 85%);
     padding: 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid black;
-    font-size: 24px;
+    font-size: 32px;
+    font-family: "Luckiest Guy";
   }
 
   .modal > div > *:not(:last-child) {
@@ -51,7 +52,9 @@
   .button {
     padding: 10px 20px;
     border: 1px solid black;
-    background: linear-gradient(-11deg, #d9a0a2 20%, #d09ba5 80%);
+    background: rgba(235, 235, 235, 0.25);
+    font-family: "Open Sans", sans-serif;
+    font-size: 24px;
   }
 
   .button:hover {

@@ -28,7 +28,7 @@
     height: 100%;
   }
 
-  :global(input) {
+  :global(input[type="text"]) {
     outline: 0;
     border: 1px solid black;
     background: rgba(235, 235, 235, 0.25);
@@ -39,16 +39,18 @@
   h2 {
     font-family: "Luckiest Guy";
     font-size: 28px;
-    margin: 9px;
-    margin-left: 20px;
-    margin-bottom: 9px;
+    margin: 0px 20px 0px 20px;
     position: relative;
+    vertical-align: middle;
   }
 
   .app {
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+  .top {
+    margin-bottom: 20px;
   }
 </style>
 

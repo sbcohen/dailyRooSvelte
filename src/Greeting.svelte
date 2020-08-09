@@ -36,14 +36,14 @@
 <style>
   h1 {
     font-family: "Luckiest Guy";
-    font-size: 40px;
+    font-size: 44px;
     font-weight: 100;
     text-align: center;
     margin-top: 60px;
     margin-left: 20px;
     margin-right: 20px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
 </style>
 
-<h1 on:click={onClick}>{greet}, {$name}!</h1>
+<h1 on:click={onClick}>G'day, {$name}!</h1>
