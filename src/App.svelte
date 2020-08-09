@@ -1,16 +1,18 @@
 <script>
-  import List from "./List.svelte";
-  import Greeting from "./Greeting.svelte";
-  import NewRoo from "./NewRoo.svelte";
-  import Name from "./Name.svelte";
+  import HomePage from "./HomePage.svelte";
+  import BoomerangPage from "./BoomerangPage.svelte";
+  import { onMount } from "svelte";
 
-  let showModal = false;
+  onMount(loadApp);
+  let page = location.hash;
 
-  function openModal() {
-    showModal = true;
+  function loadApp() {
+    window.addEventListener("hashchange", hashChange);
+    console.log("it worked!");
   }
-  function closeModal() {
-    showModal = false;
+  function hashChange() {
+    page = location.hash;
+    console.log("you hash-changed!");
   }
 </script>
 
@@ -35,33 +37,12 @@
     font-size: 24px;
     padding: 10px 20px;
   }
-
-  h2 {
-    font-family: "Luckiest Guy";
-    font-size: 28px;
-    margin: 0px 20px 0px 20px;
-    position: relative;
-    vertical-align: middle;
-  }
-
-  .app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  .top {
-    margin-bottom: 20px;
-  }
 </style>
 
-<div class="app">
-  {#if showModal}
-    <Name onClose={closeModal} />
-  {/if}
-  <div class="top">
-    <Greeting onClick={openModal} />
-    <h2>Roo's left to doo</h2>
-  </div>
-  <List />
-  <NewRoo />
-</div>
+{#if page == '#home'}
+  <HomePage />
+{:else if page == '#boomerang'}
+  <BoomerangPage />
+{:else}
+  <HomePage />
+{/if}

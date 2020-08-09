@@ -60,28 +60,22 @@
     margin: 20px 0px;
   }
 
-  #enter {
+  .button {
     font-family: "Luckiest Guy";
     font-size: 24px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
     padding: 20px 0px;
     border: 1px solid black;
-    margin-right: 10px;
     background: rgba(235, 235, 235, 0.25);
     flex-grow: 1;
     flex: 1;
     left: 0;
   }
 
-  #Roolette {
-    font-family: "Luckiest Guy";
-    font-size: 24px;
-    padding: 20px 0px;
-    border: 1px solid black;
-    margin-left: 10px;
-    background: rgba(235, 235, 235, 0.25);
-    flex-grow: 1;
-    flex: 1;
-    right: 0;
+  #enter {
+    margin-right: 10px;
   }
 
   input::placeholder {
@@ -92,9 +86,10 @@
   <h2>New roo, new you!</h2>
   <input type="text" placeholder="to doo" bind:value={textString} />
   <div class="buttons">
-    <button id="enter" on:click={submitTask}>T'day mate</button>
+    <button class="button" id="enter" on:click={submitTask}>T'day mate</button>
+    <a class="button" href="#boomerang">Boomerang</a>
     <!-- Roolette -->
-    <button id="Roolette" on:click={playRoolette}>Boomerang</button>
+    <!-- <button id="Roolette" on:click={playRoolette}>Roolette</button> -->
   </div>
 
 </div>
