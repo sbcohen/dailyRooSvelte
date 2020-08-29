@@ -32,6 +32,20 @@
 </script>
 
 <style>
+  h1 {
+    font-family: "Luckiest Guy";
+    font-size: 44px;
+    font-weight: 100;
+    text-align: center;
+    margin-top: 60px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+  }
+  .linetwo {
+    font-size: 52px;
+  }
+
   h2 {
     font-family: "Luckiest Guy";
     font-size: 28px;
@@ -83,7 +97,11 @@
 </style>
 
 <div id="form">
-  <h2>New roo, new you!</h2>
+  <h1>
+    New roo,
+    <br />
+    <span class="linetwo">new you!</span>
+  </h1>
   <input type="text" placeholder="to doo" bind:value={textString} />
   <div class="buttons">
     <button class="button" id="enter" on:click={submitTask}>T'day mate</button>

@@ -3,7 +3,7 @@
   import BoomerangPage from "./BoomerangPage.svelte";
   import { onMount } from "svelte";
   import kangaroo from "./images/kangaroo.svg";
-  console.log(kangaroo);
+  import NewRooPage from "./NewRoo.svelte";
 
   onMount(loadApp);
   let page = location.hash;
@@ -47,7 +47,7 @@
     z-index: 1;
   }
   .nav {
-    height: 100%;
+    height: calc(100% - 72px);
   }
 
   .backsplash {
@@ -78,13 +78,15 @@
       <HomePage />
     {:else if page == '#boomerang'}
       <BoomerangPage />
+    {:else if page == '#newroo'}
+      <NewRooPage />
     {:else}
       <HomePage />
     {/if}
 
   </div>
   <div class="navbar">
-    <div class="pages">New Roo</div>
+    <a class="pages" href="#newroo">New Roo</a>
     <a class="pages" href="#home">Home</a>
     <a class="pages" href="#boomerang">Boomerang</a>
   </div>

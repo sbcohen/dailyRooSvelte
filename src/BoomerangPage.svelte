@@ -15,8 +15,15 @@
     margin-right: 20px;
     margin-bottom: 40px;
   }
+  .linetwo {
+    font-size: 52px;
+  }
 </style>
 
-<h1>New roo, new you!</h1>
+<h1>
+  New roo,
+  <br />
+  <span class="linetwo">new you!</span>
+</h1>
 <div on:click={goBack}>back</div>
 <p>Hello, World!</p>
