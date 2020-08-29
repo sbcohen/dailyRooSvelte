@@ -30,6 +30,7 @@
   }
   .top {
     margin-bottom: 20px;
+    text-align: center;
   }
 </style>
 
@@ -42,5 +43,4 @@
     <h2>Roo's left to doo</h2>
   </div>
   <List />
-  <NewRoo />
 </div>
