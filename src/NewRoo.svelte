@@ -5,8 +5,10 @@
   import { roolette } from "./data.js";
 
   let textString = "";
+  let showBoomerang = false;
+  let days = [false, false, false, false, false, false, false];
 
-  function submitTask(event) {
+  function submitTask() {
     textString = textString.trim();
     if (textString != "") {
       let task = createTask(textString);
@@ -17,7 +19,19 @@
     textString = "";
   }
 
-  function playRoolette(event) {
+  function toggleDay(dayIndex) {
+    return function() {
+      days[dayIndex] = !days[dayIndex];
+    };
+  }
+
+  function toggleBoom() {
+    showBoomerang = true;
+  }
+
+  function submitBoom() {}
+
+  function playRoolette() {
     let filteredRoolette = roolette.filter(item => {
       //return a list of items not found already in the UI
       return !$Roos.find(roo => roo.text.toLowerCase() == item.toLowerCase());
@@ -32,31 +46,8 @@
 </script>
 
 <style>
-  h1 {
-    font-family: "Luckiest Guy";
-    font-size: 44px;
-    font-weight: 100;
-    text-align: center;
-    margin-top: 60px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 40px;
-  }
-  .linetwo {
-    font-size: 52px;
-  }
-
-  h2 {
-    font-family: "Luckiest Guy";
-    font-size: 28px;
-    margin-top: 0px;
-    margin-bottom: 20px;
-    position: relative;
-  }
-
   #form {
-    margin: 20px;
-    margin-bottom: 0px;
+    margin: 0px 20px;
     display: flex;
     flex-direction: column;
   }
@@ -71,21 +62,7 @@
   #form .buttons {
     display: flex;
     flex-direction: row;
-    margin: 20px 0px;
-  }
-
-  .button {
-    font-family: "Luckiest Guy";
-    font-size: 24px;
-    color: black;
-    text-decoration: none;
-    text-align: center;
-    padding: 20px 0px;
-    border: 1px solid black;
-    background: rgba(235, 235, 235, 0.25);
-    flex-grow: 1;
-    flex: 1;
-    left: 0;
+    margin-top: 20px;
   }
 
   #enter {
@@ -93,6 +70,28 @@
   }
 
   input::placeholder {
+    color: #626262;
+  }
+
+  .schedule {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 20px 0px;
+  }
+  .day {
+    display: flex;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    font-weight: bold;
+    font-size: 18px;
+    justify-content: center;
+    align-items: center;
+  }
+  .on {
+    background: #eedb76;
   }
 </style>
 
@@ -100,14 +99,42 @@
   <h1>
     New roo,
     <br />
-    <span class="linetwo">new you!</span>
+    <span class="linetwo">New you!</span>
   </h1>
+  <h2>Schedule a roo</h2>
   <input type="text" placeholder="to doo" bind:value={textString} />
   <div class="buttons">
     <button class="button" id="enter" on:click={submitTask}>T'day mate</button>
-    <a class="button" href="#boomerang">Boomerang</a>
+    <button class="button" id="boomerang" on:click={toggleBoom}>
+      Boomerang
+    </button>
     <!-- Roolette -->
     <!-- <button id="Roolette" on:click={playRoolette}>Roolette</button> -->
   </div>
-
+  {#if showBoomerang}
+    <div class="schedule">
+      <div class="day" class:on={days[0] == true} on:click={toggleDay(0)}>
+        S
+      </div>
+      <div class="day" class:on={days[1] == true} on:click={toggleDay(1)}>
+        M
+      </div>
+      <div class="day" class:on={days[2] == true} on:click={toggleDay(2)}>
+        T
+      </div>
+      <div class="day" class:on={days[3] == true} on:click={toggleDay(3)}>
+        W
+      </div>
+      <div class="day" class:on={days[4] == true} on:click={toggleDay(4)}>
+        T
+      </div>
+      <div class="day" class:on={days[5] == true} on:click={toggleDay(5)}>
+        F
+      </div>
+      <div class="day" class:on={days[6] == true} on:click={toggleDay(6)}>
+        S
+      </div>
+    </div>
+    <button class="button" on:click={submitBoom}>Submit</button>
+  {/if}
 </div>

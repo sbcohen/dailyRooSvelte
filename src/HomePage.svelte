@@ -16,10 +16,7 @@
 
 <style>
   h2 {
-    font-family: "Luckiest Guy";
-    font-size: 28px;
     margin: 0px 20px 0px 20px;
-    position: relative;
     vertical-align: middle;
   }
 
@@ -40,7 +37,7 @@
   {/if}
   <div class="top">
     <Greeting onClick={openModal} />
-    <h2>Roo's left to doo</h2>
+    <h2>Your daily roo's</h2>
   </div>
   <List />
 </div>

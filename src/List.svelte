@@ -41,6 +41,11 @@
     height: 56px;
     min-height: 56px;
   }
+
+  :global(body.darkMode) .list-item {
+    border-color: white;
+  }
+
   .checked .text {
     /* :checked matches any checked/selected radio, checkbox, or option */
     text-decoration: line-through;

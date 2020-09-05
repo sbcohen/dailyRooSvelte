@@ -4,6 +4,7 @@ import { writable } from "svelte/store";
 let list = Load("myRoo", []);
 export const Roos = writable(list);
 export const name = writable(Load("myName", "mate"));
+export const isDark = writable(false); //makes a thing that can be globally changed
 
 Roos.subscribe((updatedRoos) => Save("myRoo", updatedRoos));
 
