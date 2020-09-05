@@ -3,6 +3,7 @@
   import { random } from "./helpers.js";
   import { Roos } from "./data.js";
   import { roolette } from "./data.js";
+  import { pop } from "./data.js";
 
   let textString = "";
   let showBoomerang = false;
@@ -15,6 +16,7 @@
       $Roos.push(task); //appends task to end of array
       Roos.set($Roos); //refresh array - let svelte know this value has changed so it needs to update UI
       //a simpler way of writing push and set is $Roos = $Roos.concat([task])
+      pop("Roohoo!");
     }
     textString = "";
   }

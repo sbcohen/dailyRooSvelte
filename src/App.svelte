@@ -8,6 +8,7 @@
   import home from "./images/home.svg";
   import boomerang from "./images/boomerang.svg";
   import { isDark } from "./data.js";
+  import { toast } from "./data.js";
 
   let myDate = new Date(); //renders initial date when page is first run
 
@@ -22,10 +23,10 @@
       //function that repeatedly updates the date/time
       myDate = new Date();
       let isNight = myDate.getHours() > 20 || myDate.getHours() < 5; //isNight will be true or false
-      isNight = true; // uncomment for darkmode testing
+      //isNight = true; // uncomment for darkmode testing
       document.body.classList.toggle("darkMode", isNight == true);
       $isDark = isNight;
-    }, 60 * 1); //time in milliseconds to rerun function
+    }, 60 * 1000); //time in milliseconds to rerun function
     return () => {
       clearInterval(timerID); //called on unMount (this is just in good practice)
     };
@@ -106,6 +107,32 @@
     flex-direction: column;
     z-index: 1;
   }
+
+  .toaster {
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 100px;
+    pointer-events: none;
+  }
+
+  .toast {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: white;
+    display: inline-block;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transition: opacity 1s;
+  }
+
   .nav {
     height: calc(100% - 72px);
   }
@@ -144,8 +171,8 @@
     {:else}
       <HomePage />
     {/if}
-
   </div>
+
   <div class="navbar">
     <a class="pages" href="#newroo">
       <img src={checkmark} alt="new roo" />
@@ -157,4 +184,8 @@
       <img src={boomerang} alt="boomerang" />
     </a>
   </div>
+</div>
+
+<div class="toaster">
+  <div class="toast" class:show={$toast.show}>{$toast.text}</div>
 </div>
