@@ -1,9 +1,10 @@
 <script>
-  import { createTask } from "./helpers.js";
+  import { createTask, createBoom } from "./helpers.js";
   import { random } from "./helpers.js";
-  import { Roos } from "./data.js";
+  import { Roos, Booms } from "./data.js";
   import { roolette } from "./data.js";
   import { pop } from "./data.js";
+  import { isDark } from "./data.js";
 
   let textString = "";
   let showBoomerang = false;
@@ -28,10 +29,22 @@
   }
 
   function toggleBoom() {
-    showBoomerang = true;
+    showBoomerang = !showBoomerang;
   }
 
-  function submitBoom() {}
+  function submitBoom() {
+    textString = textString.trim();
+    if (textString != "") {
+      let boom = createBoom(textString, days);
+      $Booms.push(boom); //appends task to end of array
+      Booms.set($Booms); //refresh array - let svelte know this value has changed so it needs to update UI
+      //a simpler way of writing push and set is $Roos = $Roos.concat([task])
+      pop("Roohoo!");
+    }
+    textString = "";
+    showBoomerang = false;
+    days = [false, false, false, false, false, false, false];
+  }
 
   function playRoolette() {
     let filteredRoolette = roolette.filter(item => {
@@ -67,6 +80,11 @@
     margin-top: 20px;
   }
 
+  :global(body.darkMode) .buttons {
+    border-color: white;
+    color: white;
+  }
+
   #enter {
     margin-right: 10px;
   }
@@ -93,7 +111,8 @@
     align-items: center;
   }
   .on {
-    background: #eedb76;
+    background: #f7f79e;
+    color: black;
   }
 </style>
 

@@ -4,13 +4,14 @@
   import NewRooPage from "./NewRoo.svelte";
   import { onMount } from "svelte";
   import kangaroo from "./images/kangaroo.svg";
-  import checkmark from "./images/checkmark.svg";
+  import add from "./images/add.svg";
   import home from "./images/home.svg";
   import boomerang from "./images/boomerang.svg";
+  import stars from "./images/stars.svg";
   import { isDark } from "./data.js";
   import { toast } from "./data.js";
-
-  let myDate = new Date(); //renders initial date when page is first run
+  import { Booms, Roos, lastBoom } from "./data.js";
+  import { createTask } from "./helpers.js";
 
   onMount(loadApp);
   let page = location.hash;
@@ -21,12 +22,13 @@
     //to get time of day
     let timerID = setInterval(() => {
       //function that repeatedly updates the date/time
-      myDate = new Date();
+      let myDate = new Date();
       let isNight = myDate.getHours() > 20 || myDate.getHours() < 5; //isNight will be true or false
       //isNight = true; // uncomment for darkmode testing
       document.body.classList.toggle("darkMode", isNight == true);
       $isDark = isNight;
-    }, 60 * 1000); //time in milliseconds to rerun function
+    }, 60 * 1); //time in milliseconds to rerun function
+    loadBoom();
     return () => {
       clearInterval(timerID); //called on unMount (this is just in good practice)
     };
@@ -34,6 +36,28 @@
   function hashChange() {
     page = location.hash;
     console.log("you hash-changed!");
+  }
+  function loadBoom() {
+    console.log($lastBoom);
+    let myDate = new Date();
+    myDate.setHours(0, 0, 0, 0);
+    if (myDate.getTime() != new Date($lastBoom).getTime()) {
+      let dayIndex = myDate.getDay();
+      console.log(dayIndex);
+      for (let i = 0; i < $Booms.length; i++) {
+        let boom = $Booms[i];
+        console.log(boom);
+        if (boom.days[dayIndex] == true) {
+          // checks if current day of week matches with a Boomerang assigned to that day
+          let task = createTask(boom.text); // copies the boom from myBoom into myRoo
+          $Roos.push(task); //appends task to end of array
+          Roos.set($Roos); //refresh array - let svelte know this value has changed so it needs to update UI
+          //a simpler way of writing push and set is $Roos = $Roos.concat([task])
+          console.log("true!");
+        }
+      }
+      $lastBoom = myDate;
+    }
   }
 </script>
 
@@ -48,7 +72,8 @@
   }
 
   :global(body.darkMode) {
-    background: black;
+    background: linear-gradient(-11deg, #330155 10%, #010157 50%, #030006 80%);
+    color: white;
   }
 
   :global(#app) {
@@ -86,18 +111,28 @@
     padding: 10px 20px;
   }
 
+  :global(body.darkMode input[type="text"]) {
+    border-color: white;
+    color: white;
+  }
+
   :global(.button) {
     font-family: "Luckiest Guy";
     font-size: 24px;
     color: black;
     text-decoration: none;
     text-align: center;
-    padding: 20px 0px;
+    padding: 24px 0px 16px 0px;
     border: 1px solid black;
     background: rgba(235, 235, 235, 0.25);
     flex-grow: 1;
     flex: 1;
     left: 0;
+  }
+
+  :global(body.darkMode .button) {
+    border-color: white;
+    color: white;
   }
 
   .ux {
@@ -142,6 +177,12 @@
     position: fixed;
     opacity: 0.25;
   }
+
+  .stars {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+  }
   .navbar {
     display: flex;
     height: 72px;
@@ -159,6 +200,9 @@
 </style>
 
 <img src={kangaroo} class="backsplash" alt="kangaroo" />
+{#if $isDark == true}
+  <img src={stars} class="stars" alt="stars" />
+{/if}
 
 <div class="ux">
   <div class="nav">
@@ -175,7 +219,7 @@
 
   <div class="navbar">
     <a class="pages" href="#newroo">
-      <img src={checkmark} alt="new roo" />
+      <img src={add} alt="new roo" />
     </a>
     <a class="pages" href="#home">
       <img src={home} alt="home" />

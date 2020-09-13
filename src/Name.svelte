@@ -40,9 +40,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid;
     font-size: 32px;
     font-family: "Luckiest Guy";
+  }
+
+  :global(body.darkMode) #innermodal {
+    background: linear-gradient(-11deg, #010157 20%, #030006 90%);
   }
 
   .modal > div > *:not(:last-child) {
@@ -51,7 +55,7 @@
 
   .button {
     padding: 10px 20px;
-    border: 1px solid black;
+    border: 1px solid;
     background: rgba(235, 235, 235, 0.25);
     font-family: "Open Sans", sans-serif;
     font-size: 24px;

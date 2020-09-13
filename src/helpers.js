@@ -25,6 +25,12 @@ export function createTask(text, done = false) {
   return { text, done, createTime };
 }
 
+//function to create the data representation of the boomerang. Doneness and time will be added once copied to myRoo
+export function createBoom(text, days = []) {
+  let createTime = new Date();
+  return { text, days, createTime };
+}
+
 //function that gets all saved tasks in correct sort order by doneness & time
 export function sortList(list) {
   function compareListItem(a, b) {
