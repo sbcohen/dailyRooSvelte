@@ -20,30 +20,34 @@
   function loadApp() {
     window.addEventListener("hashchange", hashChange);
     console.log("it worked!");
+    update();
     //to get time of day
-    let timerID = setInterval(() => {
-      //function that repeatedly updates the date/time
-      let myDate = new Date();
-      let isNight = myDate.getHours() > 20 || myDate.getHours() < 5; //isNight will be true or false
-      //isNight = true; // uncomment for darkmode testing
-      document.body.classList.toggle("darkMode", isNight == true);
-      $isDark = isNight;
-    }, 60 * 1); //time in milliseconds to rerun function
-
-    //the next 3 lines are hacky - don't panic - we'll come back and fix it
-    let myDate = new Date(); //get the date
-    myDate.setHours(0, 0, 0, 0); //rewind the time to midnight of the current day (h, m, s, ms)
-    if (myDate.getTime() != new Date($lastBoom).getTime()) {
-      //new Date by default gives current time BUT if you pass something through new Date, if
-      cleanUp();
-      loadBoom();
-      $lastBoom = myDate; //tracks last time we noted the date change from one day to the other
-    }
+    let timerID = setInterval(update, 60 * 1000); //time in milliseconds to rerun function
 
     return () => {
       clearInterval(timerID); //called on unMount (this is just in good practice)
     };
   }
+
+  function update() {
+    //function that repeatedly updates the date/time
+    let myDate = new Date();
+    let isNight = myDate.getHours() > 20 || myDate.getHours() < 5; //isNight will be true or false
+    //isNight = true; // uncomment for darkmode testing
+    document.body.classList.toggle("darkMode", isNight == true);
+    $isDark = isNight;
+
+    //function that repeated checks what day it is and reloads new booms/cleans up old
+    //the next 2 lines are hacky - don't panic - we'll come back and fix it
+    myDate.setHours(0, 0, 0, 0); //rewind the time to midnight of the current day (h, m, s, ms)
+    if (true || myDate.getTime() != new Date($lastBoom).getTime()) {
+      //new Date by default gives current time BUT if you pass something through new Date, if
+      cleanUp();
+      loadBoom();
+      $lastBoom = myDate; //tracks last time we noted the date change from one day to the other
+    }
+  }
+
   function hashChange() {
     page = location.hash;
     console.log("you hash-changed!");
