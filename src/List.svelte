@@ -1,15 +1,10 @@
 <script>
   import { createTask, sortList } from "./helpers.js";
-  import { Roos } from "./data.js";
+  import { Roos, deleteTask } from "./data.js";
 
   function toggleChecked(task) {
     task.done = !task.done;
     Roos.set($Roos);
-  }
-
-  function deleteTask(task) {
-    //this anonymous function is called when the X is clicked to delete a list item. it will delete the item from the saved memory and sort and rebuild the list on the display. It works the same way as the check box function above
-    $Roos = $Roos.filter(each => each != task);
   }
 
   let sortedList;
@@ -21,7 +16,6 @@
 <style>
   .list {
     overflow-y: scroll;
-    height: 200px;
     display: flex;
     flex-direction: column;
     flex: 1;

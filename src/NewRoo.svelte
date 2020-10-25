@@ -5,6 +5,7 @@
   import { roolette } from "./data.js";
   import { pop } from "./data.js";
   import { isDark } from "./data.js";
+  import Schedule from "./Schedule.svelte";
 
   let textString = "";
   let showBoomerang = false;
@@ -23,9 +24,7 @@
   }
 
   function toggleDay(dayIndex) {
-    return function() {
-      days[dayIndex] = !days[dayIndex];
-    };
+    days[dayIndex] = !days[dayIndex];
   }
 
   function toggleBoom() {
@@ -93,26 +92,8 @@
     color: #626262;
   }
 
-  .schedule {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-evenly;
-    padding: 20px 0px;
-  }
-  .day {
-    display: flex;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-weight: bold;
-    font-size: 18px;
-    justify-content: center;
-    align-items: center;
-  }
-  .on {
-    background: #f7f79e;
-    color: black;
+  :global(.spacing) {
+    margin: 20px 0px;
   }
 </style>
 
@@ -133,29 +114,7 @@
     <!-- <button id="Roolette" on:click={playRoolette}>Roolette</button> -->
   </div>
   {#if showBoomerang}
-    <div class="schedule">
-      <div class="day" class:on={days[0] == true} on:click={toggleDay(0)}>
-        S
-      </div>
-      <div class="day" class:on={days[1] == true} on:click={toggleDay(1)}>
-        M
-      </div>
-      <div class="day" class:on={days[2] == true} on:click={toggleDay(2)}>
-        T
-      </div>
-      <div class="day" class:on={days[3] == true} on:click={toggleDay(3)}>
-        W
-      </div>
-      <div class="day" class:on={days[4] == true} on:click={toggleDay(4)}>
-        T
-      </div>
-      <div class="day" class:on={days[5] == true} on:click={toggleDay(5)}>
-        F
-      </div>
-      <div class="day" class:on={days[6] == true} on:click={toggleDay(6)}>
-        S
-      </div>
-    </div>
+    <Schedule className="spacing" {days} {toggleDay} />
     <button class="button" on:click={submitBoom}>Submit</button>
   {/if}
 </div>

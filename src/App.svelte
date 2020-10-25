@@ -12,6 +12,7 @@
   import { toast } from "./data.js";
   import { Booms, Roos, lastBoom } from "./data.js";
   import { createTask } from "./helpers.js";
+  import { deleteTask } from "./data.js";
 
   onMount(loadApp);
   let page = location.hash;
@@ -28,7 +29,17 @@
       document.body.classList.toggle("darkMode", isNight == true);
       $isDark = isNight;
     }, 60 * 1); //time in milliseconds to rerun function
-    loadBoom();
+
+    //the next 3 lines are hacky - don't panic - we'll come back and fix it
+    let myDate = new Date(); //get the date
+    myDate.setHours(0, 0, 0, 0); //rewind the time to midnight of the current day (h, m, s, ms)
+    if (myDate.getTime() != new Date($lastBoom).getTime()) {
+      //new Date by default gives current time BUT if you pass something through new Date, if
+      cleanUp();
+      loadBoom();
+      $lastBoom = myDate; //tracks last time we noted the date change from one day to the other
+    }
+
     return () => {
       clearInterval(timerID); //called on unMount (this is just in good practice)
     };
@@ -37,18 +48,28 @@
     page = location.hash;
     console.log("you hash-changed!");
   }
+
+  function matchMaker(boom) {
+    // function that asks does this boom already exist in myRoo ($Roos)?
+    for (let i = 0; i < $Roos.length; i++) {
+      let roo = $Roos[i];
+      if (roo.text == boom.text) {
+        return false; //no go
+      }
+    }
+    return true; //go
+  }
+
   function loadBoom() {
     console.log($lastBoom);
-    let myDate = new Date();
-    myDate.setHours(0, 0, 0, 0);
-    if (myDate.getTime() != new Date($lastBoom).getTime()) {
-      let dayIndex = myDate.getDay();
-      console.log(dayIndex);
-      for (let i = 0; i < $Booms.length; i++) {
-        let boom = $Booms[i];
-        console.log(boom);
-        if (boom.days[dayIndex] == true) {
-          // checks if current day of week matches with a Boomerang assigned to that day
+    let dayIndex = new Date().getDay();
+    console.log(dayIndex);
+    for (let i = 0; i < $Booms.length; i++) {
+      let boom = $Booms[i];
+      console.log(boom);
+      if (boom.days[dayIndex] == true) {
+        // checks if current day of week matches with a Boomerang assigned to that day
+        if (matchMaker(boom) == true) {
           let task = createTask(boom.text); // copies the boom from myBoom into myRoo
           $Roos.push(task); //appends task to end of array
           Roos.set($Roos); //refresh array - let svelte know this value has changed so it needs to update UI
@@ -56,7 +77,19 @@
           console.log("true!");
         }
       }
-      $lastBoom = myDate;
+    }
+  }
+
+  function cleanUp() {
+    let trash = [];
+    for (let i = 0; i < $Roos.length; i++) {
+      let roo = $Roos[i];
+      if (roo.done == true) {
+        trash.push(roo);
+      }
+    }
+    for (let i = 0; i < trash.length; i++) {
+      deleteTask(trash[i]);
     }
   }
 </script>

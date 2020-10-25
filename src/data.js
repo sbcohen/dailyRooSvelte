@@ -1,5 +1,5 @@
 import { Load, Save } from "./helpers.js";
-import { writable } from "svelte/store";
+import { writable, get } from "svelte/store";
 
 let list = Load("myRoo", []);
 let sched = Load("myBoom", []);
@@ -16,6 +16,13 @@ export function pop(text) {
   setTimeout(() => {
     toast.set({ text, show: false });
   }, 2000); //time in ms
+}
+export function deleteTask(task) {
+  //this anonymous function is called when the X is clicked to delete a list item. it will delete the item from the saved memory and sort and rebuild the list on the display. It works the same way as the check box function above
+  Roos.set(get(Roos).filter((each) => each != task)); //get = value of
+}
+export function deleteBoom(task) {
+  Booms.set(get(Booms).filter((each) => each != task));
 }
 
 Roos.subscribe((updatedRoos) => Save("myRoo", updatedRoos));
