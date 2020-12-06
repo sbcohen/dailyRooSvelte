@@ -28,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 64px; /* creates a gutter of sorts to adapt to screen size*/
+    padding: 32px; /* creates a gutter of sorts to adapt to screen size*/
     box-sizing: border-box; /* makes width include padding - always use this */
     background: rgba(0, 0, 0, 0.75);
   }
@@ -43,6 +43,11 @@
     border: 1px solid;
     font-size: 32px;
     font-family: "Luckiest Guy";
+    text-align: center;
+  }
+
+  .text {
+    width: 100%;
   }
 
   :global(body.darkMode) #innermodal {
@@ -69,7 +74,7 @@
 <div class="modal" id="modal" on:click={close}>
   <div id="innermodal">
     <div>Enter your name</div>
-    <input type="text" placeholder="mate" bind:value={$name} />
+    <input class="text" type="text" placeholder="mate" bind:value={$name} />
     <div class="button" on:click={submitName}>Save</div>
   </div>
 </div>

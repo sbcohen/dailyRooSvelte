@@ -40,7 +40,7 @@
     //function that repeated checks what day it is and reloads new booms/cleans up old
     //the next 2 lines are hacky - don't panic - we'll come back and fix it
     myDate.setHours(0, 0, 0, 0); //rewind the time to midnight of the current day (h, m, s, ms)
-    if (true || myDate.getTime() != new Date($lastBoom).getTime()) {
+    if (myDate.getTime() != new Date($lastBoom).getTime()) {
       //new Date by default gives current time BUT if you pass something through new Date, if
       cleanUp();
       loadBoom();
@@ -137,7 +137,6 @@
     font-size: 28px;
     margin-top: 0px;
     margin-bottom: 20px;
-    position: relative;
   }
 
   :global(input[type="text"]) {
@@ -146,6 +145,7 @@
     background: rgba(235, 235, 235, 0.25);
     font-size: 24px;
     padding: 10px 20px;
+    box-sizing: border-box;
   }
 
   :global(body.darkMode input[type="text"]) {
@@ -206,7 +206,11 @@
   }
 
   .nav {
-    height: calc(100% - 72px);
+    height: calc(100% - 48px);
+    overflow-y: auto;
+  }
+  .spacer {
+    height: 10px;
   }
 
   .backsplash {
@@ -222,7 +226,9 @@
   }
   .navbar {
     display: flex;
-    height: 72px;
+    height: 48px; /* change calc rule in .nav if edit height in px */
+    padding: 8px;
+    box-sizing: border-box;
     background: black;
   }
   .pages {
@@ -233,6 +239,11 @@
     text-decoration: none;
     align-items: center;
     justify-content: center;
+  }
+
+  .pages > img {
+    width: 100%;
+    height: 100%;
   }
 </style>
 
@@ -252,6 +263,7 @@
     {:else}
       <HomePage />
     {/if}
+    <div class="spacer" />
   </div>
 
   <div class="navbar">

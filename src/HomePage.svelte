@@ -3,6 +3,16 @@
   import Greeting from "./Greeting.svelte";
   import NewRoo from "./NewRoo.svelte";
   import Name from "./Name.svelte";
+  import { onMount } from "svelte";
+  import { name } from "./data.js";
+
+  onMount(loadModal);
+  function loadModal() {
+    console.log($name);
+    if ($name == "mate") {
+      showModal = true;
+    }
+  }
 
   let showModal = false;
 
