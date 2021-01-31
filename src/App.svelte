@@ -3,7 +3,7 @@
   import BoomerangPage from "./BoomerangPage.svelte";
   import NewRooPage from "./NewRoo.svelte";
   import { onMount } from "svelte";
-  import kangaroo from "./images/kangaroo.svg";
+  import kangarooFull from "./images/kangarooFull.svg";
   import add from "./images/add.svg";
   import home from "./images/home.svg";
   import boomerang from "./images/boomerang.svg";
@@ -214,9 +214,11 @@
   }
 
   .backsplash {
-    height: 100%;
+    height: 65%;
     position: fixed;
     opacity: 0.25;
+    bottom: 0;
+    left: 0;
   }
 
   .stars {
@@ -247,7 +249,7 @@
   }
 </style>
 
-<img src={kangaroo} class="backsplash" alt="kangaroo" />
+<img src={kangarooFull} class="backsplash" alt="kangaroo" />
 {#if $isDark == true}
   <img src={stars} class="stars" alt="stars" />
 {/if}
